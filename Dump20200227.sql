@@ -1,5 +1,5 @@
-CREATE DATABASE  IF NOT EXISTS `bd_appstore` /*!40100 DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci */;
-USE `bd_appstore`;
+-- CREATE DATABASE  IF NOT EXISTS `bd_appstore` /*!40100 DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci */;
+-- USE `bd_appstore`;
 -- MySQL dump 10.13  Distrib 5.7.17, for Win64 (x86_64)
 --
 -- Host: localhost    Database: bd_appstore
@@ -37,7 +37,7 @@ CREATE TABLE `tbl_modulos` (
   `mod_updated_by` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`mod_id`),
   UNIQUE KEY `modulo_unico` (`mod_categoria`,`mod_nome`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -46,6 +46,7 @@ CREATE TABLE `tbl_modulos` (
 
 LOCK TABLES `tbl_modulos` WRITE;
 /*!40000 ALTER TABLE `tbl_modulos` DISABLE KEYS */;
+INSERT INTO `tbl_modulos` VALUES (1,'Performance','Checkin & Checkout',105.99,'Lorem ipsum dolor sit amet, consectetur adipiscg elit','/1/foto.jpg','2020-02-26 23:17:22','Rolim',NULL,NULL),(2,'Engajamento','Planos de Ação',95.99,'Lorem ipsum dolor sit amet, consectetur adipiscg elit','/2/foto.jpg','2020-02-26 23:17:23','Rolim',NULL,NULL),(3,'Cultura','Fitting Cultural',85.99,'Lorem ipsum dolor sit amet, consectetur adipiscg elit','/3/foto.jpg','2020-02-26 23:17:24','Rolim',NULL,NULL),(4,'Relações','Assessments e Recomendações',125.99,'Lorem ipsum dolor sit amet, consectetur adipiscg elit','/4/foto.jpg','2020-02-26 23:17:25','Rolim',NULL,NULL),(5,'Performance','Quick Deck',105.99,'Lorem ipsum dolor sit amet, consectetur adipiscg elit','/5/foto.jpg','2020-02-26 23:17:26','Rolim',NULL,NULL);
 /*!40000 ALTER TABLE `tbl_modulos` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -71,7 +72,7 @@ CREATE TABLE `tbl_modulos_clientes` (
   KEY `fk_mcl_mod` (`mod_id`),
   CONSTRAINT `fk_mcl_mod` FOREIGN KEY (`mod_id`) REFERENCES `tbl_modulos` (`mod_id`) ON UPDATE CASCADE,
   CONSTRAINT `fk_mcl_use` FOREIGN KEY (`use_id`) REFERENCES `tbl_users` (`use_id`) ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -80,6 +81,7 @@ CREATE TABLE `tbl_modulos_clientes` (
 
 LOCK TABLES `tbl_modulos_clientes` WRITE;
 /*!40000 ALTER TABLE `tbl_modulos_clientes` DISABLE KEYS */;
+INSERT INTO `tbl_modulos_clientes` VALUES (1,1,1,1,'2020-02-26 23:37:23','Rolim',NULL,NULL),(2,1,2,1,'2020-02-26 23:37:24','Rolim',NULL,NULL),(3,1,3,0,'2020-02-26 23:37:25','Rolim',NULL,NULL),(4,1,4,1,'2020-02-26 23:37:26','Rolim',NULL,NULL),(5,1,5,1,'2020-02-26 23:37:27','Rolim',NULL,NULL);
 /*!40000 ALTER TABLE `tbl_modulos_clientes` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -225,4 +227,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-02-26  5:32:35
+-- Dump completed on 2020-02-27  6:13:24

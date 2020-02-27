@@ -36,6 +36,10 @@ $container['AuthMiddleware'] = function ($c) {
     return new \BET\Auth\AuthMiddleware($c);
 };
 
+$container['CorsMiddleware'] = function ($c) {
+    return new \BET\Auth\CorsMiddleware($c);
+};
+
 $container['Gump'] = function ($c) {
     return new \BET\Auth\MyGump( $c, 'pt-br' );
 };

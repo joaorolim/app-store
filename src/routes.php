@@ -17,14 +17,19 @@ $app->get('/', function ($request, $response, $args) {
 
 
 // Grupo de rotas do ADM
-$app->group('/adm', function() use ($app) {
-    $app->get('[/]', 'LoginController:index')->setName('root');
+//https://stackoverflow.com/questions/31618734/cors-not-working-in-php-slim-framework
+$app->group('/api', function() use ($app) {
+    //$app->get('[/]', 'LoginController:index')->setName('root');
 
-    $app->map(['GET', 'POST'], '/login', 'LoginController:index')->setName('login');
+    $app->get('/modulos', 'AtendimentoController:getModulos')->setName('root')->add( $app->getContainer()['CorsMiddleware'] );
+    $app->get('/modulo/ativar/{id}', 'AtendimentoController:ativaModulo')->setName('root')->add( $app->getContainer()['CorsMiddleware'] );
+    $app->get('/modulo/desativar/{id}', 'AtendimentoController:desativaModulo')->setName('root')->add( $app->getContainer()['CorsMiddleware'] );
 
-    $app->get('/logout', 'LoginController:logout')->setName('logout');
+    // $app->map(['GET', 'POST'], '/login', 'LoginController:index')->setName('login');
 
-    $app->get('/home', 'HomeController:index')->setName('home')->add( $app->getContainer()['AuthMiddleware'] );
+    // $app->get('/logout', 'LoginController:logout')->setName('logout');
+
+    // $app->get('/home', 'HomeController:index')->setName('home')->add( $app->getContainer()['AuthMiddleware'] );
 
 
     // $app->group('/atendimento', function() use ($app) {

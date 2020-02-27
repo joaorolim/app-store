@@ -13,6 +13,128 @@ class ServiceAtendimento extends AbstractServiceModel
         parent::__construct( $c, $atendimento );
     }
 
+    /**
+     * Retorna os módulos cadastrados
+     * @param
+     * @return String
+     */
+    public function getModulos()
+    {
+        try {
+
+            $sql = 'SELECT * FROM tbl_modulos ';
+
+            $stmt = $this->db->prepare( $sql );
+
+            $stmt->execute();
+
+            return $stmt->fetchAll(\PDO::FETCH_OBJ);
+
+        } catch ( \Exception $e ) {
+            setMessage( 'Não foi possível listar os dados!', 'danger' );
+            $this->c->logger->addAlert( $e->getMessage().' - Não foi possível listar os dados!' );
+            return null;
+        }
+
+    }
+
+    /**
+     * Ativa o módulo de acordo com o ID
+     * @param  $idMod  - ID do módulo que será ativado
+     * @param  $idUser - ID do usuário/cliente que está logado na aplicação
+     * @return boolean
+     */
+    public function ativaModulo( $idUser, $idMod )
+    {
+        $this->db->beginTransaction();
+
+        $res = $this->getModuloByClient($idUser, $idMod);
+
+        if ( isset($res[0]->mcl_ativo) ) {
+            // UPDATE
+            if ( (int)$res[0]->mcl_ativo === 0 ) {
+
+                if ( ! $this->updateModuloByClient($idUser, $idMod) ) {
+                    $this->db->rollback();
+                    return false;
+                }
+
+            } else {
+                $this->db->rollback();
+                return false;
+            }
+
+        } else {
+            // INSERT
+            $resp = $this->getModuloById($idMod);
+
+            if ( isset($resp[0]->mod_id) ) {
+                $rs = $this->insertModuloByClient($idUser, $idMod);
+            } else {
+                $this->db->rollback();
+                return false;
+            }
+
+        }
+
+        $this->db->commit();
+        return true;
+    }
+
+
+    /**
+     * Retorna os módulos cadastrados de acordo com o cliente/usuário
+     * @param
+     * @return object
+     */
+    public function getModuloByClient( $idUser, $idMod )
+    {
+        try {
+
+            $sql = 'SELECT * FROM tbl_modulos_clientes WHERE use_id = ? AND mod_id = ? ';
+
+            $stmt = $this->db->prepare( $sql );
+            $stmt->bindValue( 1, $idUser,  \PDO::PARAM_INT );
+            $stmt->bindValue( 2, $idMod,   \PDO::PARAM_INT );
+
+            $stmt->execute();
+
+            return $stmt->fetchAll(\PDO::FETCH_OBJ);
+
+        } catch ( \Exception $e ) {
+            setMessage( 'Não foi possível listar os dados!', 'danger' );
+            $this->c->logger->addAlert( $e->getMessage().' - Não foi possível listar os dados!' );
+            return null;
+        }
+
+    }
+
+
+    /**
+     * Ativa os módulos cadastrados de acordo com o cliente/usuário
+     * @param
+     * @return boolean
+     */
+    public function updateModuloByClient( $idUser, $idMod )
+    {
+        try {
+
+            $sql = 'UPDATE tbl_modulos_clientes SET mcl_ativo = 1 WHERE use_id = ? AND mod_id = ? ';
+
+            $stmt = $this->db->prepare( $sql );
+            $stmt->bindValue( 1, $idUser,  \PDO::PARAM_INT );
+            $stmt->bindValue( 2, $idMod,   \PDO::PARAM_INT );
+
+            return $stmt->execute();
+
+        } catch ( \Exception $e ) {
+            setMessage( 'Não foi possível atualizar os dados!', 'danger' );
+            $this->c->logger->addAlert( $e->getMessage().' - Não foi possível atualizar os dados!' );
+            return null;
+        }
+
+    }
+
 
     /**
      * Retorna a quantidade de atendimentos por tipo
@@ -141,6 +263,32 @@ class ServiceAtendimento extends AbstractServiceModel
         } catch ( \Exception $e ) {
             setMessage( 'Não foi possível listar os atendimentos deste usuário!', 'danger' );
             $this->c->logger->addAlert( $e->getMessage().' - Não foi possível listar os atendimentos deste usuário!' );
+            return null;
+        }
+
+    }
+
+    /**
+     * Retorna o munícipe, de acordo com o cpf, para ser consumido na API
+     * @param
+     * @return String
+     */
+    public function getMunicipeToApi( $cpf )
+    {
+        try {
+
+            $sql = 'SELECT mun_id,mun_nome FROM tbl_municipes WHERE mun_cpf = ? ';
+
+            $stmt = $this->db->prepare( $sql );
+            $stmt->bindValue( 1, $cpf, \PDO::PARAM_STR );
+
+            $stmt->execute();
+
+            return $stmt->fetchAll(\PDO::FETCH_OBJ);
+
+        } catch ( \Exception $e ) {
+            setMessage( 'Não foi possível listar o munícipe!', 'danger' );
+            $this->c->logger->addAlert( $e->getMessage().' - Não foi possível listar o munícipe!' );
             return null;
         }
 
