@@ -46,7 +46,7 @@ CREATE TABLE `tbl_modulos` (
 
 LOCK TABLES `tbl_modulos` WRITE;
 /*!40000 ALTER TABLE `tbl_modulos` DISABLE KEYS */;
-INSERT INTO `tbl_modulos` VALUES (1,'Performance','Checkin & Checkout',105.99,'Lorem ipsum dolor sit amet, consectetur adipiscg elit','/1/foto.jpg','2020-02-26 23:17:22','Rolim',NULL,NULL),(2,'Engajamento','Planos de Ação',95.99,'Lorem ipsum dolor sit amet, consectetur adipiscg elit','/2/foto.jpg','2020-02-26 23:17:23','Rolim',NULL,NULL),(3,'Cultura','Fitting Cultural',85.99,'Lorem ipsum dolor sit amet, consectetur adipiscg elit','/3/foto.jpg','2020-02-26 23:17:24','Rolim',NULL,NULL),(4,'Relações','Assessments e Recomendações',125.99,'Lorem ipsum dolor sit amet, consectetur adipiscg elit','/4/foto.jpg','2020-02-26 23:17:25','Rolim',NULL,NULL),(5,'Performance','Quick Deck',105.99,'Lorem ipsum dolor sit amet, consectetur adipiscg elit','/5/foto.jpg','2020-02-26 23:17:26','Rolim',NULL,NULL);
+INSERT INTO `tbl_modulos` VALUES (1,'Performance','Checkin & Checkout',105.99,'Lorem ipsum dolor sit amet, consectetur adipiscg elit','/1/foto.jpg','2020-02-26 23:17:22','Rolim',NULL,NULL),(2,'Engajamento','Planos de Ação',95.99,'Lorem ipsum dolor sit amet, consectetur adipiscg elit','/2/foto.jpg','2020-02-26 23:17:23','Rolim',NULL,NULL),(3,'Cultura','Fitting Cultural',85.99,'Lorem ipsum dolor sit amet, consectetur adipiscg elit','/3/foto.jpg','2020-02-26 23:17:24','Rolim',NULL,NULL),(4,'Relações','Assessments e Recomendações',125.99,'Lorem ipsum dolor sit amet, consectetur adipiscg elit','/4/foto.jpg','2020-02-26 23:17:25','Rolim',NULL,NULL),(5,'Performance','Quick Deck',105.99,'Lorem ipsum dolor sit amet, consectetur adipiscg elit','/5/foto.jpg','2020-02-26 23:17:26','Rolim',NULL,NULL),(6,'Performance','Evidências & Feedback',75.99,'Lorem ipsum dolor sit amet, consectetur adipiscg elit','/6/foto.jpg','2020-02-26 23:17:28','Rolim');
 /*!40000 ALTER TABLE `tbl_modulos` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -81,7 +81,7 @@ CREATE TABLE `tbl_modulos_clientes` (
 
 LOCK TABLES `tbl_modulos_clientes` WRITE;
 /*!40000 ALTER TABLE `tbl_modulos_clientes` DISABLE KEYS */;
-INSERT INTO `tbl_modulos_clientes` VALUES (1,1,1,1,'2020-02-26 23:37:23','Rolim',NULL,NULL),(2,1,2,1,'2020-02-26 23:37:24','Rolim',NULL,NULL),(3,1,3,0,'2020-02-26 23:37:25','Rolim',NULL,NULL),(4,1,4,1,'2020-02-26 23:37:26','Rolim',NULL,NULL),(5,1,5,1,'2020-02-26 23:37:27','Rolim',NULL,NULL);
+INSERT INTO `tbl_modulos_clientes` VALUES (1,1,1,1,'2020-02-26 23:37:23','Rolim',NULL,NULL),(2,1,2,1,'2020-02-26 23:37:24','Rolim',NULL,NULL),(3,1,3,0,'2020-02-26 23:37:25','Rolim',NULL,NULL),(4,1,4,1,'2020-02-26 23:37:26','Rolim',NULL,NULL);
 /*!40000 ALTER TABLE `tbl_modulos_clientes` ENABLE KEYS */;
 UNLOCK TABLES;
 
